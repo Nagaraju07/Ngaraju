@@ -4,98 +4,84 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeligateDemo
+namespace Deligates2
 {
-    
-        delegate int Deligate(int n1, int n2);
-        class ArithmeticOperations
-        {
-            static int num;
 
-            public static int AddNum(int p,int q)
-            {
-                num = p+q;
-                return num;
-            }
-        public static int SubNum(int p, int q)
+    delegate int PerformArithmeticOperation(int x, int y);
+    class AtithOp
+    {
+        static void DoOperation(int num1, int num2, PerformArithmeticOperation arOperation)
         {
-            num = p - q;
-            return num;
+            int z = arOperation(num1, num2);
+            Console.WriteLine("{0} and {1} is:::{2}",num1,num2,z);
+        }
+        public static int Add(int num1, int num2)
+        {
+            return num1 + num2;
+
+
+        }
+        public static int Sub(int num1, int num2)
+        {
+            return num1 - num2;
+
         }
 
-
-        public static int MultNum(int p,int q)
-            {
-                num =p*q;
-                return num;
-            }
-        public static int DivNum(int p, int q)
+        static int Multiply(int num1, int num2)
         {
-            num = p / q;
-            return num;
+            return num1 * num2;
         }
 
-        public static int MaxNum(int p, int q)
+        static int Divide(int num1, int num2)
         {
-            return num=(p > q) ? p : q;
-        
+            return num1 / num2;
+        }
+        static int Max(int num1, int num2)
+        {
+            return num1 > num2 ? num1 : num2;
         }
 
-        public static int getResult()
-           {
-               return num;
-         }
-
-            static void Main(string[] args)
+        public class CSharpAp
+        {
+            static void Main()
             {
-            //create delegate instances
-             //Deligate nc;
 
-            Console.WriteLine("******************************");
-            Console.WriteLine("1.Addition::");
-            Console.WriteLine("2.Subtraction::");
-            Console.WriteLine("3.Multiplication::");
-            Console.WriteLine("4.Divition::");
-            Console.WriteLine("5.Maximum number::");
-            Console.WriteLine("******************************");
-            Console.WriteLine("enter choice::");
-            int num = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter 1st number::");
-            int n1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter 2st number::");
-            int n2 = Convert.ToInt32(Console.ReadLine());
-            switch (num)
-            {
-                case 1:
-                    Deligate nc1 = new Deligate(AddNum);
-                    nc1(n1, n2);
-                    Console.WriteLine("Value of Num: {0}", getResult());
-                    break;
-                case 2:
-                    Deligate nc2 = new Deligate(SubNum);
-                    nc2(n1, n2);
-                    Console.WriteLine("Value of Num: {0}", getResult());
-                    break;
-                case 3:
-                    Deligate nc3 = new Deligate(MultNum);
-                    nc3(n1, n2);
-                    Console.WriteLine("Value of Num: {0}", getResult());
-                    break;
-                case 4:
-                    Deligate nc4 = new Deligate(DivNum);
-                    nc4(n1, n2);
-                    Console.WriteLine("Value of Num: {0}", getResult());
-                    break;
-                case 5:
-                    Deligate nc5 = new Deligate(MaxNum);
-                    nc5(n1, n2);
-                    Console.WriteLine("Value of Num: {0}", getResult());
-                    break;
-                default:
-                    Console.WriteLine("invalid choice");
-                    break;
-            }
+                Console.WriteLine("******************************");
+                Console.WriteLine("1.Addition::");
+                Console.WriteLine("2.Subtraction::");
+                Console.WriteLine("3.Multiplication::");
+                Console.WriteLine("4.Divition::");
+                Console.WriteLine("5.Maximum number::");
+                Console.WriteLine("******************************");
+                Console.WriteLine("enter choice::");
+                int num = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("enter 1st number::");
+                int a = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("enter 2st number::");
+                int b = Convert.ToInt32(Console.ReadLine());
+                switch (num)
+                {
+                    case 1:
+                        DoOperation(a, b, Add);
+                        break;
+                    case 2:
+                        DoOperation(a, b, Sub);
+                        break;
+                    case 3:
+                        DoOperation(a, b, Multiply);
+                        break;
+                    case 4:
+                        DoOperation(a, b, Divide);
+                        break;
+                    case 5:
+                        DoOperation(a, b, Max);
+                        break;
+                  
+                }
                 Console.ReadKey();
             }
+
+        }
     }
 }
+  
